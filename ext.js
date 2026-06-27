@@ -98,6 +98,32 @@
                         }
                     },
 
+                    {
+                        opcode: "gcd",
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: "gcd [N] [X]",
+                        arguments: {
+                            N: {type: Scratch.ArgumentType.NUMBER, defaultValue: 48},
+                            X: {type: Scratch.ArgumentType.NUMBER, defaultValue: 6 }
+                        }
+                    },
+
+                    {
+                        opcode: "lcm",
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: "lcm [N] [X]",
+                        arguments: {
+                            N: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 12
+                            },
+                            X: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 18
+                            }
+                        }
+                    },
+
                     // Colores
                     {
                         opcode: "randomColor",
@@ -141,6 +167,37 @@
 
         clamp(args) {
             return Math.max(args.MIN, Math.min(args.MAX, args.N));
+        }
+
+        gcd(args) {
+            let a = Math.abs(Number(args.N));
+            let b = Math.abs(Number(args.X));
+
+            while (b !== 0) {
+                let t = b;
+                b = a % b;
+                a = t;
+            }
+
+            return a;
+        }
+
+        lcm(args) {
+            let a = Math.abs(Number(args.N));
+            let b = Math.abs(Number(args.X));
+
+            if (a === 0 || b === 0) return 0;
+
+            let x = a;
+            let y = b;
+
+            while (y !== 0) {
+                let t = y;
+                y = x % y;
+                x = t;
+            }
+
+            return (a * b) / x;
         }
 
         randomColor() {
