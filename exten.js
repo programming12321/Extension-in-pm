@@ -15,7 +15,7 @@
                     {
                         opcode: 'input',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'input([PROMPT])',
+                        text: 'input[PROMPT]',
                         arguments: {
                             PROMPT: {
                                 type: Scratch.ArgumentType.STRING,
