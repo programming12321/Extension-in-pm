@@ -59,6 +59,17 @@
                                 defaultValue: 4
                             }
                         }
+                    },
+                    {
+                        opcode: 'type',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'type[VALUE]',
+                        arguments: {
+                            VALUE: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: '123'
+                            }
+                        }
                     }
                 ]
             };
@@ -89,6 +100,31 @@
             } else {
                 return `${real}${imag}i`;
             }
+        }
+
+        type(args) {
+            const value = String(args.VALUE).trim();
+
+            if (value === "") {
+                return "empty";
+            }
+
+            if (!isNaN(Number(value))) {
+                if (Number.isInteger(Number(value))) {
+                    return "int";
+                }
+                return "float";
+            }
+
+            if (value === "true" || value === "false") {
+                return "bool";
+            }
+
+            if (/^-?\d+(\.\d+)?[+-]\d+(\.\d+)?i$/.test(value)) {
+                return "complex";
+            }
+
+            return "str";
         }
     }
 
