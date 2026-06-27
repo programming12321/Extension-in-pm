@@ -48,7 +48,7 @@
                     {
                         opcode: 'complex',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'complex[REAL] [IMAG])',
+                        text: 'complex[REAL][IMAG]',
                         arguments: {
                             REAL: {
                                 type: Scratch.ArgumentType.NUMBER,
@@ -81,10 +81,14 @@
         }
 
         complex(args) {
-            return {
-                real: Number(args.REAL),
-                imag: Number(args.IMAG)
-            };
+            const real = Number(args.REAL);
+            const imag = Number(args.IMAG);
+
+            if (imag >= 0) {
+                return `${real}+${imag}i`;
+            } else {
+                return `${real}${imag}i`;
+            }
         }
     }
 
