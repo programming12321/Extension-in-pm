@@ -57,7 +57,7 @@
                         arguments: {
                             TEXT: {
                                 type: Scratch.ArgumentType.STRING,
-                                defaultValue: "HELLO"
+                                defaultValue: "hello"
                             },
                             START: {
                                 type: Scratch.ArgumentType.NUMBER,
@@ -66,6 +66,22 @@
                             END: {
                                 type: Scratch.ArgumentType.NUMBER,
                                 defaultValue: 5
+                            }
+                        }
+                    },
+
+                    {
+                        opcode: "instring",
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: "instring [TEXT] in [STR]",
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "hello world"
+                            },
+                            STR: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "world"
                             }
                         }
                     },
@@ -117,6 +133,10 @@
                 Number(args.START) - 1,
                 Number(args.END),
             );
+        }
+
+        instring(args) {
+            return String(args.TEXT).includes(String(args.STR));
         }
 
         clamp(args) {
