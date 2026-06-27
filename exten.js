@@ -5,34 +5,21 @@
 
         getInfo() {
             return {
-                id: 'miextension',
-                name: 'Mi Extension',
-
-                // 🎨 colores del bloque
-                color1: '#4C97FF',   // color principal
-                color2: '#3373CC',   // borde/sombra
-                color3: '#2A65B0',   // opcional (variación)
+                id: 'mini',
+                name: 'MINI',
+                color1: '#4C97FF',
+                color2: '#3373CC',
+                color3: '#2A65B0',
 
                 blocks: [
                     {
-                        opcode: 'print_num',
+                        opcode: 'int',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'print number [NAME]',
+                        text: 'int([VALUE])',
                         arguments: {
-                            NAME: {
-                                type: Scratch.ArgumentType.NUMBER,
-                                defaultValue: 123,
-                            }
-                        }
-                    },
-                    {
-                        opcode: 'print_str',
-                        blockType: Scratch.BlockType.REPORTER,
-                        text: 'print str [STR]',
-                        arguments: {
-                            STR: {
+                            VALUE: {
                                 type: Scratch.ArgumentType.STRING,
-                                defaultValue: 'hello',
+                                defaultValue: '123'
                             }
                         }
                     }
@@ -40,12 +27,8 @@
             };
         }
 
-        print_num(args) {
-            return Number(args.NAME);
-        }
-
-        print_str(args) {
-            return String(args.STR);
+        int(args) {
+            return parseInt(args.VALUE, 10);
         }
     }
 
