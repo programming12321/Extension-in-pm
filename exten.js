@@ -13,6 +13,21 @@
 
                 blocks: [
                     {
+                        opcode: 'inputVar',
+                        blockType: Scratch.BlockType.COMMAND,
+                        text: 'set[VAR]to input[PROMPT]',
+                        arguments: {
+                            VAR: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'nombre'
+                            },
+                            PROMPT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: '¿Nombre?'
+                            }
+                        }
+                    },
+                    {
                         opcode: 'int',
                         blockType: Scratch.BlockType.REPORTER,
                         text: 'int[VALUE]',
@@ -125,6 +140,17 @@
             }
 
             return "str";
+        }
+
+        inputVar(args, util) {
+            const value = prompt(args.PROMPT) ?? "";
+
+            // Busca la variable por nombre
+            const variable = util.target.lookupVariableByNameAndType(args.VAR, "");
+
+            if (variable) {
+                variable.value = value;
+            }
         }
     }
 
