@@ -15,7 +15,7 @@
                     {
                         opcode: 'int',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'int([VALUE])',
+                        text: 'int[VALUE]',
                         arguments: {
                             VALUE: {
                                 type: Scratch.ArgumentType.STRING,
