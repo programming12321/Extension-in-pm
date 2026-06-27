@@ -49,6 +49,26 @@
                             }
                         }
                     },
+                    
+                    {
+                        opcode: "substring",
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: "substring [TEXT] from [START] to [END]",
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "HELLO"
+                            },
+                            START: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 0
+                            },
+                            END: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 5
+                            }
+                        }
+                    },
 
                     // Matemáticas
                     {
@@ -90,6 +110,13 @@
 
         lowercase(args) {
             return args.TEXT.toLowerCase();
+        }
+
+        substring(args) {
+            return String(args.TEXT).slice(
+                Number(args.START) - 1,
+                Number(args.END),
+            );
         }
 
         clamp(args) {
