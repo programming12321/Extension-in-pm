@@ -217,7 +217,7 @@
         }
 
         xroot(args) {
-            return Number(args.N) ** (1 / Number(args.X))
+            return Number(args.X) ** (1 / Number(args.N))
         }
 
         randomColor() {
