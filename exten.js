@@ -43,7 +43,11 @@
         }
 
         str(args) {
-            return String(args.TXT);
+            if (!isNaN(Number(args.TXT))) {
+                return NaN;
+            } else {
+                return String(args.TXT);
+            }
         }
     }
 
