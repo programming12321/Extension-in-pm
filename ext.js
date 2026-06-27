@@ -127,7 +127,7 @@
                     {
                         opcode: "xroot",
                         blockType: Scratch.BlockType.REPORTER,
-                        text: "[N]th root of [X]",
+                        text: "root [N] of [X]",
                         arguments: {
                             N: {
                                 type: Scratch.ArgumentType.NUMBER,
