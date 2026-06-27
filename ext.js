@@ -140,6 +140,18 @@
                         }
                     },
 
+                    {
+                        opcode: "factorial",
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: "[N]!",
+                        arguments: {
+                            N: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 5
+                            }
+                        }
+                    },
+
                     // Colores
                     {
                         opcode: "randomColor",
@@ -218,6 +230,19 @@
 
         xroot(args) {
             return Number(args.X) ** (1 / Number(args.N))
+        }
+
+        factorial(args) {
+            let n = Math.floor(Number(args.N));
+
+            if (n < 0) return "";
+
+            let r = 1;
+            for (let i = 2; i <= n; i++) {
+                r *= i;
+            }
+
+            return r;
         }
 
         randomColor() {
