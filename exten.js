@@ -45,6 +45,21 @@
                             }
                         }
                     },
+                    {
+                        opcode: 'complex',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'complex([REAL], [IMAG])',
+                        arguments: {
+                            REAL: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 3
+                            },
+                            IMAG: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 4
+                            }
+                        }
+                    }
                 ]
             };
         }
@@ -63,6 +78,13 @@
 
         float(args) {
             return parseFloat(args.FLOAT);
+        }
+
+        complex(args) {
+            return {
+                real: Number(args.REAL),
+                imag: Number(args.IMAG)
+            };
         }
     }
 
