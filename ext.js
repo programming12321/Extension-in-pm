@@ -7,8 +7,9 @@
             return {
                 id: "extras",
                 name: "Extras",
-                color1: "rgb(0, 255, 191)",
-                color2: "rgb(0, 247, 185)",
+                color1: "#00FFBF",
+                color2: "#00F7B9",
+                color3: "#00E8AE",
 
                 blocks: [
 
