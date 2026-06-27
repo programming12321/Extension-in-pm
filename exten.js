@@ -34,6 +34,17 @@
                             }
                         }
                     },
+                    {
+                        opcode: 'float',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'float[FLOAT]',
+                        arguments: {
+                            FLOAT: {
+                                type: Scratch.ArgumentType.FLOAT,
+                                defaultValue: '3.141592'
+                            }
+                        }
+                    },
                 ]
             };
         }
@@ -48,6 +59,10 @@
             } else {
                 return String(args.TXT);
             }
+        }
+
+        float(args) {
+            return parseFloat(args.VALUE);
         }
     }
 
