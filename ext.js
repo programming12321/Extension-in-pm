@@ -86,6 +86,38 @@
                         }
                     },
 
+                    {
+                        opcode: "startsWith",
+                        blockType: Scratch.BlockType.BOOLEAN,
+                        text: "[TEXT] starts with [START]",
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "hello"
+                            },
+                            START: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "he"
+                            }
+                        }
+                    },
+
+                    {
+                        opcode: "endsWith",
+                        blockType: Scratch.BlockType.BOOLEAN,
+                        text: "[TEXT] ends with [END]",
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "hello"
+                            },
+                            END: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "lo"
+                            }
+                        }
+                    },
+
                     // Matemáticas
                     {
                         opcode: "clamp",
@@ -191,6 +223,14 @@
 
         instring(args) {
             return String(args.TEXT).includes(String(args.STR));
+        }
+
+        startsWith(args) {
+            return String(args.TEXT).startsWith(String(args.START));
+        }
+
+        endsWith(args) {
+            return String(args.TEXT).endsWith(String(args.END));
         }
 
         clamp(args) {
