@@ -22,13 +22,28 @@
                                 defaultValue: '123'
                             }
                         }
-                    }
+                    },
+                    {
+                        opcode: 'str',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'str[TXT]',
+                        arguments: {
+                            TXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'hello'
+                            }
+                        }
+                    },
                 ]
             };
         }
 
         int(args) {
             return parseInt(args.VALUE, 10);
+        }
+
+        str(args) {
+            return String(args.TXT);
         }
     }
 
