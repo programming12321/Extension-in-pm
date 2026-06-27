@@ -48,7 +48,7 @@
                     {
                         opcode: 'complex',
                         blockType: Scratch.BlockType.REPORTER,
-                        text: 'complex([REAL], [IMAG])',
+                        text: 'complex[REAL] [IMAG])',
                         arguments: {
                             REAL: {
                                 type: Scratch.ArgumentType.NUMBER,
