@@ -124,6 +124,22 @@
                         }
                     },
 
+                    {
+                        opcode: "xroot",
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: "[N]th root of [X]",
+                        arguments: {
+                            N: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 3
+                            },
+                            X: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 27
+                            }
+                        }
+                    },
+
                     // Colores
                     {
                         opcode: "randomColor",
@@ -198,6 +214,10 @@
             }
 
             return (a * b) / x;
+        }
+
+        xroot(args) {
+            return Number(args.N) ** (1 / Number(args.X))
         }
 
         randomColor() {
