@@ -40,8 +40,8 @@
                         text: 'float[FLOAT]',
                         arguments: {
                             FLOAT: {
-                                type: Scratch.ArgumentType.FLOAT,
-                                defaultValue: '3.141592'
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 3.141592
                             }
                         }
                     },
@@ -62,7 +62,7 @@
         }
 
         float(args) {
-            return parseFloat(args.VALUE);
+            return parseFloat(args.FLOAT);
         }
     }
 
