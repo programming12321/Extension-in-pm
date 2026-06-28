@@ -3,6 +3,10 @@
 
     class JavaExtension {
 
+        constructor() {
+            this.vars = {};
+        }
+
         getInfo() {
             return {
                 id: 'java',
@@ -17,6 +21,32 @@
                             CODE: {
                                 type: Scratch.ArgumentType.STRING,
                                 defaultValue: 'System.out.println("Hola");'
+                            }
+                        }
+                    },
+                    {
+                        opcode: "intVar",
+                        blockType: Scratch.BlockType.COMMAND,
+                        text: "int [NAME] = [VALUE]",
+                        arguments: {
+                            NAME: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "x"
+                            },
+                            VALUE: {
+                                type: Scratch.ArgumentType.NUMBER,
+                                defaultValue: 0
+                            }
+                        }
+                    },
+                    {
+                        opcode: "getInt",
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: "[NAME]",
+                        arguments: {
+                            NAME: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: "x"
                             }
                         }
                     }
@@ -40,6 +70,14 @@
                     alert(m[1]);
                 }
             }
+        }
+
+        intVar(args) {
+            this.vars[args.NAME] = Math.floor(Number(args.VALUE));
+        }
+
+        getInt(args) {
+            return this.vars[args.NAME] ?? 0;
         }
     }
 
