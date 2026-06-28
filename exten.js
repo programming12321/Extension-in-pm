@@ -1,3 +1,34 @@
+function parseComplex(expr) {
+    expr = expr.replace(/\s+/g, "");
+
+    let re = 0;
+    let im = 0;
+
+    // detectar i*y
+    const imMatch = expr.match(/([+-]?\d*)\*?i\*?(\d+)?/);
+
+    if (imMatch) {
+        let coeff = imMatch[1];
+        let num = imMatch[2];
+
+        if (coeff === "" || coeff === "+") coeff = 1;
+        if (coeff === "-") coeff = -1;
+
+        if (!num) num = 1;
+
+        im = Number(coeff) * Number(num);
+
+        expr = expr.replace(imMatch[0], "");
+    }
+
+    // lo que queda es real
+    if (expr.length > 0) {
+        re = Number(expr);
+    }
+
+    return { re, im };
+}
+
 (function (Scratch) {
     'use strict';
 
@@ -12,17 +43,6 @@
                 color3: '#2A65B0',
 
                 blocks: [
-                    {
-                        opcode: 'input',
-                        blockType: Scratch.BlockType.REPORTER,
-                        text: 'input[PROMPT]',
-                        arguments: {
-                            PROMPT: {
-                                type: Scratch.ArgumentType.STRING,
-                                defaultValue: '¿Nombre?'
-                            }
-                        }
-                    },
                     {
                         opcode: 'ascii',
                         blockType: Scratch.BlockType.REPORTER,
@@ -92,6 +112,11 @@
                                 defaultValue: '123'
                             }
                         }
+                    },
+                    {
+                        opcode: 'i',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'i'
                     }
                 ]
             };
@@ -114,14 +139,32 @@
         }
 
         complex(args) {
-            const real = Number(args.REAL);
-            const imag = Number(args.IMAG);
+            const expr = args.EXPR.replace(/\s+/g, "");
 
-            if (imag >= 0) {
-                return `${real}+${imag}i`;
-            } else {
-                return `${real}${imag}i`;
+            let re = 0;
+            let im = 0;
+
+            const imMatch = expr.match(/([+-]?\d*)\*?i\*?(\d+)?/);
+
+            let rest = expr;
+
+            if (imMatch) {
+                let coeff = imMatch[1];
+                let num = imMatch[2] || 1;
+
+                if (coeff === "" || coeff === "+") coeff = 1;
+                if (coeff === "-") coeff = -1;
+
+                im = Number(coeff) * Number(num);
+
+                rest = rest.replace(imMatch[0], "");
             }
+
+            if (rest !== "") {
+                re = Number(rest);
+            }
+
+            return `${re}${im >= 0 ? "+" : ""}${im}i`;
         }
 
         type(args) {
@@ -149,10 +192,6 @@
             return "str";
         }
 
-        input(args) {
-            return prompt(args.PROMPT) ?? "";
-        }
-
         ascii(args) {
             const text = String(args.TEXT);
 
@@ -161,6 +200,10 @@
             }
 
             return text.charCodeAt(0);
+        }
+
+        i() {
+            return "i";
         }
     }
 
