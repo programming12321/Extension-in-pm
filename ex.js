@@ -7,8 +7,6 @@
             return {
                 id: 'java',
                 name: 'Java',
-                color1: '#f89820',
-                color2: '#d87c00',
 
                 blocks: [
                     {
@@ -32,14 +30,14 @@
             for (let line of lines) {
                 line = line.trim();
 
-                const match = line.match(/^System\.out\.println\((.*)\);$/);
+                const m = line.match(/^System\.out\.println\((.*)\);$/);
 
-                if (match) {
-                    try {
-                        console.log(eval(match[1]));
-                    } catch {
-                        console.log(match[1]);
-                    }
+                if (!m) continue;
+
+                try {
+                    alert(eval(m[1]));
+                } catch {
+                    alert(m[1]);
                 }
             }
         }
