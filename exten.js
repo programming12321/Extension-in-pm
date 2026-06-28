@@ -24,6 +24,17 @@
                         }
                     },
                     {
+                        opcode: 'ascii',
+                        blockType: Scratch.BlockType.REPORTER,
+                        text: 'ascii [TEXT]',
+                        arguments: {
+                            TEXT: {
+                                type: Scratch.ArgumentType.STRING,
+                                defaultValue: 'A'
+                            }
+                        }
+                    },
+                    {
                         opcode: 'int',
                         blockType: Scratch.BlockType.REPORTER,
                         text: 'int[VALUE]',
@@ -140,6 +151,16 @@
 
         input(args) {
             return prompt(args.PROMPT) ?? "";
+        }
+
+        ascii(args) {
+            const text = String(args.TEXT);
+
+            if (text.length !== 1) {
+                return "";
+            }
+
+            return text.charCodeAt(0);
         }
     }
 
