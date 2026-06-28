@@ -61,13 +61,32 @@
                 line = line.trim();
 
                 const m = line.match(/^System\.out\.println\((.*)\);$/);
-
                 if (!m) continue;
 
+                let expr = m[1].trim();
+
+                // ¿Es una variable?
+                if (expr in this.vars) {
+                    alert(this.vars[expr]);
+                    continue;
+                }
+
+                // ¿Es un número?
+                if (!isNaN(expr)) {
+                    alert(Number(expr));
+                    continue;
+                }
+
+                // Intentar evaluar una expresión
                 try {
-                    alert(eval(m[1]));
+                    const nombres = Object.keys(this.vars);
+                    const valores = Object.values(this.vars);
+
+                    const resultado = new Function(...nombres, `return ${expr};`)(...valores);
+                    alert(resultado);
                 } catch {
-                    alert(m[1]);
+                    // Si es un texto entre comillas
+                    alert(expr.replace(/^["']|["']$/g, ""));
                 }
             }
         }
