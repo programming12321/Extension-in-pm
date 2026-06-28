@@ -14,13 +14,18 @@
 
                 blocks: [
                     {
-                        opcode: 'run',
+                        opcode: "main",
+                        blockType: Scratch.BlockType.HAT,
+                        text: "public static void main(String[] args)"
+                    },
+                    {
+                        opcode: "println",
                         blockType: Scratch.BlockType.COMMAND,
-                        text: 'Run Java [CODE]',
+                        text: "System.out.println([VALUE])",
                         arguments: {
-                            CODE: {
+                            VALUE: {
                                 type: Scratch.ArgumentType.STRING,
-                                defaultValue: 'System.out.println("Hola");'
+                                defaultValue: "Hola"
                             }
                         }
                     },
@@ -54,40 +59,39 @@
             };
         }
 
-        run(args) {
-            const lines = args.CODE.split("\n");
+        main() {
+            return true;
+        }
 
-            for (let line of lines) {
-                line = line.trim();
+        println(args) {
+            const expr = args.VALUE.trim();
 
-                const m = line.match(/^System\.out\.println\((.*)\);$/);
-                if (!m) continue;
+            // Variable
+            if (expr in this.vars) {
+                alert(this.vars[expr]);
+                return;
+            }
 
-                let expr = m[1].trim();
+            // Número
+            if (!isNaN(expr)) {
+                alert(Number(expr));
+                return;
+            }
 
-                // ¿Es una variable?
-                if (expr in this.vars) {
-                    alert(this.vars[expr]);
-                    continue;
-                }
+            // Expresión
+            try {
+                const nombres = Object.keys(this.vars);
+                const valores = Object.values(this.vars);
 
-                // ¿Es un número?
-                if (!isNaN(expr)) {
-                    alert(Number(expr));
-                    continue;
-                }
+                const resultado = new Function(
+                    ...nombres,
+                    `return ${expr};`
+                )(...valores);
 
-                // Intentar evaluar una expresión
-                try {
-                    const nombres = Object.keys(this.vars);
-                    const valores = Object.values(this.vars);
-
-                    const resultado = new Function(...nombres, `return ${expr};`)(...valores);
-                    alert(resultado);
-                } catch {
-                    // Si es un texto entre comillas
-                    alert(expr.replace(/^["']|["']$/g, ""));
-                }
+                alert(resultado);
+            } catch {
+                // Texto
+                alert(expr.replace(/^["']|["']$/g, ""));
             }
         }
 
